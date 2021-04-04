@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+<typeAliases>
+    <typeAlias type="com.bean.User" alias="User"/>
+    <typeAlias type="com.bean.userInformation.LoginUser" alias="LoginUser"/>
+    <typeAlias type="com.bean.userInformation.ChangePasswordUser" alias="ChangePasswordUser"/>
+    <typeAlias type="com.bean.userInformation.FindPasswordUser" alias="FindPasswordUser"/>
+    <typeAlias type="com.bean.questionInformation.QueryQuestion" alias="QueryQuestion"/>
+    <typeAlias type="com.bean.Question" alias="Question"/>
+    <typeAlias type="com.bean.CommentLv1" alias="CommentLv1"/>
+    <typeAlias type="com.bean.CommentLv2" alias="CommentLv2"/>
+    <typeAlias type="com.bean.Collection" alias="MyCollection"/>
+    <typeAlias type="com.bean.Care" alias="Care"/>
+    <typeAlias type="com.bean.careInformation.QueryCare" alias="QueryCare"/>
+    <typeAlias type="com.bean.collectionInformation.QueryCollection" alias="QueryCollection"/>
+</typeAliases>
+
+</configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.QuestionMapper">
+    <select id="getAll" parameterType="QueryQuestion" resultType="Question">
+        select * from question order by update_time desc limit #{current}, #{limit}
+    </select>
+    <select id="getAllByqQuery" parameterType="QueryQuestion" resultType="Question">
+        select * from question where title like "%${qName}%" order by update_time desc limit #{current}, #{limit}
+    </select>
+
+    <update id="support">
+        update question set comment_num = comment_num + #{count} where id = #{qId}
+    </update>
+
+    <delete id="delQuestion">
+        delete from question where u_id = #{uId} and id = #{qId}
+    </delete>
+
+    <insert id="askQuestion" parameterType="Question" useGeneratedKeys="true" keyProperty="id">
+        insert into question (title,content,u_id) values (#{title},#{content},#{uId})
+    </insert>
+
+    <select id="getQuestionByQid" resultType="Question">
+        select * from question where id = #{qId}
+    </select>
+</mapper>

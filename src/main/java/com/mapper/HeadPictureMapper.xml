@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.HeadPictureMapper">
+    <insert id="upload">
+        insert into head_picture(u_id,p_name) values (#{uId},#{newFileName}) on duplicate key update p_name = #{newFileName}
+    </insert>
+
+    <select id="getOldFileName" resultType="string" >
+        select p_name from head_picture where u_id = #{value}
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+    <select id="loginUser" parameterType="LoginUser" resultType="User">
+        select * from user where username = #{username} and password = #{password};
+    </select>
+
+    <update id="changePassword" parameterType="ChangePasswordUser">
+        update user set password = #{newPassword} where username = #{username} and password = #{oldPassword}
+    </update>
+
+    <insert id="register" parameterType="User">
+        insert into user (username,password,pet_name,email)  values (#{username},#{password},#{petName},#{email})
+    </insert>
+
+    <update id="findPassword" parameterType="FindPasswordUser">
+        update user set password = #{newPassword} where username = #{username}
+    </update>
+
+    <update id="changePetName">
+        update user set pet_name = #{petName} where id = #{id}
+    </update>
+
+    <select id="getPetNameByUId" resultType="User">
+        select id,pet_name from user where id = #{uId}
+    </select>
+</mapper>
