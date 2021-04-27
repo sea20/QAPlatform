@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.bean.CommentLv1;
 import com.bean.User;
+import com.bean.commentInformation.QueryComment1;
 import com.bean.result.Result;
 import com.mapper.CommentLv1Mapper;
 import com.service.CommentLv1Service;
@@ -30,15 +31,17 @@ public class CommentLv1ServiceImpl implements CommentLv1Service {
     }
 
     @Override
-    public Result selectAllByPid(Integer qId) {
-        List list = commentLv1Mapper.selectAllByPid(qId);
+    public Result selectAllByPid(QueryComment1 queryComment1) {
+        Integer current = queryComment1.getCurrent();
+        Integer limit = queryComment1.getLimit();
+        queryComment1.setCurrent((current-1)*limit);
+        List list = commentLv1Mapper.selectAllByQueryComment1(queryComment1);
         System.out.println(list);
         if(list != null && list.size()>0){
             return R.Ok().add("data",list);
         }
         return R.Empty();
     }
-
     @Override
     public Result postCommentLv1(CommentLv1 commentLv1, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");

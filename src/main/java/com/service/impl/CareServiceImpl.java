@@ -27,7 +27,9 @@ public class CareServiceImpl implements CareService {
     UserMapper userMapper;
     @Override
     public Result select(QueryCare queryCare) {
-        queryCare.setCurrent(queryCare.getCurrent()-1);
+        Integer current = queryCare.getCurrent();
+        Integer limit = queryCare.getLimit();
+        queryCare.setCurrent((current - 1)*limit);
         List<Care> list = careMapper.select(queryCare);
         User user = null;
         Integer uId;

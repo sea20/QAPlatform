@@ -26,4 +26,6 @@ public interface QuestionMapper {
     int askQuestion(Question question);
     //根据qid查询帖子
     Question getQuestionByQid(@Param("qId") Integer qId);
+    //根据uid查询帖子
+    List<Question> getQuestionByUid(@Param("uId") Integer uId);
 }

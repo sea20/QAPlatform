@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
                 request.getSession().removeAttribute("registerCode");
                 return R.Ok();
             }catch (Exception e){
-                //System.out.println(e);
+                System.out.println(e);
                 return R.Error("用户名已存在");
             }
         }else {

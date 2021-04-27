@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 public class QuestionServiceImpl implements QuestionService {
-    //@Autowired
+    @Autowired
     QuestionMapper questionMapper;
 
 
@@ -44,7 +44,12 @@ public class QuestionServiceImpl implements QuestionService {
     }*/
     @Override
     public Result askQuestion(Question question) {
-        int count =  questionMapper.askQuestion(question);
+        int count;
+        try {
+            count =  questionMapper.askQuestion(question);
+        }catch (Exception e){
+            return R.Error();
+        }
         if(count == 1){
             return R.Ok();
         }
@@ -77,6 +82,9 @@ public class QuestionServiceImpl implements QuestionService {
     }*/
     @Override
     public Result queryQuestions(QueryQuestion qQuery) {
+        Integer current = qQuery.getCurrent();
+        Integer limit = qQuery.getLimit();
+        qQuery.setCurrent((current-1)*limit);
         String name = qQuery.getqName();
         List list = null;
         if(name == null || name.equals("")){
@@ -127,5 +135,14 @@ public class QuestionServiceImpl implements QuestionService {
             return R.Empty();
         }
         return R.Ok().add("data",question);
+    }
+
+    @Override
+    public Result getQuestionByUid(Integer uid) {
+        List<Question> list = questionMapper.getQuestionByUid(uid);
+        if (list == null || list.size() == 0){
+            return R.Empty();
+        }
+        return R.Ok().add("data",list);
     }
 }

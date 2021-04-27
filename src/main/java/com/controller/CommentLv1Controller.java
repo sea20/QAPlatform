@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.bean.CommentLv1;
+import com.bean.commentInformation.QueryComment1;
 import com.bean.result.Result;
 import com.service.CommentLv1Service;
 import com.utils.result.R;
@@ -34,12 +35,12 @@ public class CommentLv1Controller {
         return commentLv1Service.postCommentLv1(commentLv1,request);
     }
 
-    @GetMapping("/getAllC1/{qId}")
+    @PostMapping("/getAllC1")
     @ApiOperation("根据pid查询所有一级评论")
-    @ApiImplicitParam(name = "qId",value = "帖子id" ,paramType ="path",dataType = "int")
+    @ApiImplicitParam(name = "queryComment1",value = "查询一级评论信息",paramType = "body",dataType = "查询一级评论信息")
     @ResponseBody
-    public Result selectAllByPid(@PathVariable Integer qId){
-        return commentLv1Service.selectAllByPid(qId);
+    public Result selectAllByPid(@RequestBody QueryComment1 queryComment1){
+        return commentLv1Service.selectAllByPid(queryComment1);
     }
 
     @ApiOperation("点赞一级评论")

@@ -50,23 +50,31 @@ public class QuestionController {
 
     @ApiOperation("根据qid查询帖子")
     @ApiImplicitParam(name = "qid" ,value = "帖子id",paramType = "path" ,dataType = "int")
-    @DeleteMapping("/getQuestionByQid/{qid}")
+    @PostMapping("/getQuestionByQid/{qid}")
     @ResponseBody
     public Result getQuestionByQid(@PathVariable Integer qid){
-        System.out.println(qid);
+        //system.out.println(qid);
         return questionService.getQuestionByQid(qid);
     }
 
+    @ApiOperation("根据uid查询帖子")
+    @ApiImplicitParam(name = "uid" ,value = "用户id",paramType = "path" ,dataType = "int")
+    @PostMapping("/getQuestionByUid/{uid}")
+    @ResponseBody
+    public Result getQuestionByUid(@PathVariable Integer uid){
+        //System.out.println(uid);
+        return questionService.getQuestionByUid(uid);
+    }
     @ApiOperation("搜索帖子/问题")
 
-    @DeleteMapping("/query")
+    @PostMapping("/query")
     @ResponseBody
     public Result queryQuestions(@RequestBody QueryQuestion qQuery){
         return questionService.queryQuestions(qQuery);
     }
 
     @ApiOperation("点赞/取消点赞")
-    @DeleteMapping("/support/{qId}")
+    @PostMapping("/support/{qId}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "flag",value = "点赞还是取消(true:点赞 false:取消点赞)",paramType = "body",dataType = "boolean"),
             @ApiImplicitParam(name = "qId",value = "帖子id",paramType = "path",dataType = "Integer")

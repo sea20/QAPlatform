@@ -47,8 +47,6 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public Result login(@RequestBody LoginUser loginUser,HttpServletRequest request){
-
-
         return userService.login(loginUser,request);
     }
 
@@ -85,14 +83,14 @@ public class UserController {
         return userService.changePetName(petName,request);
     }
     @ApiOperation("根据uId获取用户昵称")
-    @PostMapping("/getPetNameByUId/{uId}")
+    @GetMapping("/getPetNameByUId/{uId}")
     @ResponseBody
     public Result getPetNameByUId(@PathVariable Integer uId){
         return userService.getPetNameByUId(uId);
     }
 
     @ApiOperation("获取当前登录用户的信息")
-    @PutMapping("/getCurrentUser")
+    @GetMapping("/getCurrentUser")
     @ResponseBody
     public Result getCurrentUser(HttpSession session){
         User user = (User) session.getAttribute("user");

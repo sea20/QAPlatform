@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.QuestionMapper">
     <select id="getAll" parameterType="QueryQuestion" resultType="Question">
-        select * from question order by update_time desc limit #{current}, #{limit}
+        select * from question order by update_time and state = 1 desc limit #{current}, #{limit}
     </select>
+
     <select id="getAllByqQuery" parameterType="QueryQuestion" resultType="Question">
-        select * from question where title like "%${qName}%" order by update_time desc limit #{current}, #{limit}
+        select * from question where title like "%${qName}%" and state = 1 order by update_time desc limit #{current}, #{limit}
     </select>
 
     <update id="support">
@@ -15,7 +16,7 @@
     </update>
 
     <delete id="delQuestion">
-        delete from question where u_id = #{uId} and id = #{qId}
+        update question set state = 2 where u_id = #{uId} and id = #{qId}
     </delete>
 
     <insert id="askQuestion" parameterType="Question" useGeneratedKeys="true" keyProperty="id">
@@ -23,6 +24,11 @@
     </insert>
 
     <select id="getQuestionByQid" resultType="Question">
-        select * from question where id = #{qId}
+        select * from question where id = #{qId} and state = 1
     </select>
+
+    <select id="getQuestionByUid" resultType="Question">
+        select * from question where u_id = #{uId} and state = 1
+    </select>
+
 </mapper>

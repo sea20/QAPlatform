@@ -20,4 +20,6 @@ public interface QuestionService {
     Result support(Integer qId, Boolean flag);
     //根据qid查询帖子
     Result getQuestionByQid(Integer qid);
+    //根据uid查询帖子
+    Result getQuestionByUid(Integer uid);
 }

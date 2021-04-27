@@ -42,7 +42,9 @@ public class CollectionIServicempl implements CollectionService {
 
     @Override
     public Result select(QueryCollection queryCollection) {
-        queryCollection.setCurrent(queryCollection.getCurrent()-1);
+        Integer current = queryCollection.getCurrent();
+        Integer limit = queryCollection.getLimit();
+        queryCollection.setCurrent((current - 1)*limit);
         Integer type = queryCollection.getType();
         List<Collection> list = null;
         switch (type){

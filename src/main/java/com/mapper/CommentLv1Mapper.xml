@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.CommentLv1Mapper">
     <update id="support">
-        update comment_lv1 set like_num = like_num + 1
+        update comment_lv1 set like_num = like_num + 1 where id = #{cId}
     </update>
-    <select id="selectAllByPid" resultType="CommentLv1">
-        select * from comment_lv1 where q_id = #{qId} order by create_time
+    <select id="selectAllByQueryComment1" resultType="CommentLv1">
+        select * from comment_lv1 where q_id = #{qId} order by create_time limit #{current},#{limit}
     </select>
     <insert id="postCommentLv1" parameterType="CommentLv1">
         insert into comment_lv1(q_Id,u_Id,comment) values (#{qId},#{uId},#{comment})
