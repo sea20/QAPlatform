@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface CommentLv2Service {
     //查找所有2级评论
-    Result selectAllByc1Id(Integer c1Id);
+    Result selectAllByc1Id(Integer c1Id,Integer uId);
     //发表二级评论
     Result postCommentLv2(CommentLv2 commentLv2, HttpServletRequest request);
 }

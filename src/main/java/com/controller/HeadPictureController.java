@@ -50,4 +50,5 @@ public class HeadPictureController {
     public Result getHeadPicture(@PathVariable Integer uId){
         return headPictureService.getHeadPicture(uId);
     }
+
 }

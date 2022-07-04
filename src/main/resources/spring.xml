@@ -40,6 +40,30 @@
     </bean>-->
 
 
+    <bean  id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="50"/>
+        <property name="maxTotal" value="100"/>
+        <property name="maxWaitMillis" value="20000"/>
+    </bean>
+
+    <bean id="stringReadisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="47.108.190.196"/>
+        <property name="port" value="6379"/>
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="password" value="XuSea@Me"/>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer" ref="stringReadisSerializer"/>
+        <property name="valueSerializer" ref="stringReadisSerializer"/>
+    </bean>
+
+
 
     <!--事务管理器-->
     <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

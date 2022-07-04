@@ -20,6 +20,9 @@
     <typeAlias type="com.bean.Care" alias="Care"/>
     <typeAlias type="com.bean.careInformation.QueryCare" alias="QueryCare"/>
     <typeAlias type="com.bean.collectionInformation.QueryCollection" alias="QueryCollection"/>
+    <typeAlias type="com.bean.LittleQuestion" alias="LittleQuestion"/>
+    <typeAlias type="com.bean.LittleQuestion" alias="LittleQuestion"/>
+    <typeAlias type="com.bean.Tags" alias="Tags"/>
 </typeAliases>
 
 </configuration>

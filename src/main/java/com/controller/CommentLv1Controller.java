@@ -36,7 +36,7 @@ public class CommentLv1Controller {
     }
 
     @PostMapping("/getAllC1")
-    @ApiOperation("根据pid查询所有一级评论")
+    @ApiOperation("根据pid uid查询所有一级评论(uid可有可无)")
     @ApiImplicitParam(name = "queryComment1",value = "查询一级评论信息",paramType = "body",dataType = "查询一级评论信息")
     @ResponseBody
     public Result selectAllByPid(@RequestBody QueryComment1 queryComment1){

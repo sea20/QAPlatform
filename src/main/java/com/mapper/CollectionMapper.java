@@ -18,6 +18,10 @@ public interface CollectionMapper {
     int deCollection(@Param("qId") Integer qId,@Param("uId") Integer uId);
     //是否收藏
     int ifCollection(@Param("qId") Integer qId,@Param("uId") Integer uId);
-    //查询
+    //查询我收藏的
     List select(QueryCollection queryCollection);
+    //查询我收藏的个数
+    Integer selectSize(QueryCollection queryCollection);
+    //删除收藏(因为帖子被删除了)
+    void deCollectionByQid(@Param("qId") Integer qId);
 }

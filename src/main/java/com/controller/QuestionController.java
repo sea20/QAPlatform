@@ -5,12 +5,15 @@ import com.bean.User;
 import com.bean.questionInformation.QueryQuestion;
 import com.bean.result.Result;
 import com.service.QuestionService;
+import com.thread.Scan;
+import com.thread.Support;
 import com.utils.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +32,16 @@ public class QuestionController {
 
 
     @ApiOperation("发表帖子/提问")
-    @ApiImplicitParam(name = "question" ,value = "帖子信息",paramType = "body" ,dataType = "帖子")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "question" ,value = "帖子信息",paramType = "body" ,dataType = "帖子"),
+            @ApiImplicitParam(name = "tagId",value = "标签id",paramType = "path",dataType = "Integer")
+    })
     @PostMapping("/submit")
     @ResponseBody
-    public Result changePassword(@RequestBody Question question,HttpSession session){
+    public Result askQuestion(@RequestBody Question question,@PathVariable(required = false) Integer tagId, HttpSession session){
         User user = (User) session.getAttribute("user");
         question.setuId(user.getId());
-        return questionService.askQuestion(question);
+        return questionService.askQuestion(question,tagId);
     }
 
 
@@ -81,6 +87,15 @@ public class QuestionController {
     })
     @ResponseBody
     public Result ifSupport(@PathVariable Integer qId,@RequestBody Boolean flag){
-        return questionService.support(qId,flag);
+        Support.start(qId,flag);
+        return R.Ok();
+    }
+    @ApiOperation("增加浏览量")
+    @PostMapping("/scan/{qId}")
+    @ApiImplicitParam(name = "qId",value = "帖子id",paramType = "path",dataType = "Integer")
+    @ResponseBody
+    public Result scan(@PathVariable Integer qId){
+        Scan.start(qId);
+        return R.Ok();
     }
 }

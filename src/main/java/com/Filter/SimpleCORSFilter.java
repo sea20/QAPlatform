@@ -47,5 +47,4 @@ public class SimpleCORSFilter implements Filter {
         isCross = isCrossStr.equals("true") ? true : false;
         System.out.println(isCrossStr);
     }
-
 }

@@ -7,15 +7,24 @@
         insert into collection (u_id,q_id) values (#{uId},#{qId})
     </insert>
 
-    <delete id="deCollection">
-        delete from collection where u_id = #{uId} and q_id = #{qId}
-    </delete>
+    <update id="deCollection">
+        update collection set state = 2  where u_id = #{uId} and q_id = #{qId}
+    </update>
+
+    <update id="deCollectionByQid">
+        update collection set state = 2  where q_id = #{qId}
+    </update>
 
     <select id="ifCollection" resultType="int">
         select count(*) from collection where q_id = #{qId} and u_id = #{uId}
     </select>
 
     <select id="select" resultType="MyCollection" parameterType="QueryCollection">
-        select * from collection where u_id = #{uId} order by create_time desc limit #{current},#{limit}
+        select * from collection where u_id = #{uId} and state = 1 order by create_time desc limit #{current},#{limit}
     </select>
+
+    <select id="selectSize" resultType="int" parameterType="QueryCollection">
+        select count(*) from collection where u_id = #{uId} and state = 1
+    </select>
+
 </mapper>

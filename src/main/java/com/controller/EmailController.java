@@ -33,7 +33,6 @@ public class EmailController {
     })
     @ResponseBody
     public Result sendEmail(@RequestBody String email, @PathVariable String name, HttpSession session){
-        System.out.println(email);
         return emailService.sendEmail(email,name,session);
     }
 }

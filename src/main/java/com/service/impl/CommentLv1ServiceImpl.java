@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,12 +33,21 @@ public class CommentLv1ServiceImpl implements CommentLv1Service {
 
     @Override
     public Result selectAllByPid(QueryComment1 queryComment1) {
+        Integer uid = queryComment1.getuId();
         Integer current = queryComment1.getCurrent();
         Integer limit = queryComment1.getLimit();
         queryComment1.setCurrent((current-1)*limit);
-        List list = commentLv1Mapper.selectAllByQueryComment1(queryComment1);
-        System.out.println(list);
+        List<CommentLv1> list = commentLv1Mapper.selectAllByQueryComment1(queryComment1);
+        //System.out.println(list);
         if(list != null && list.size()>0){
+            if(uid != null){
+                Iterator<CommentLv1> iterator = list.iterator();
+                while (iterator.hasNext()){
+                    if(iterator.next().getuId() != uid){
+                        iterator.remove();
+                    }
+                }
+            }
             return R.Ok().add("data",list);
         }
         return R.Empty();

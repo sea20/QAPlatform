@@ -25,6 +25,8 @@ public class Question {
     private Integer likeNum;
     @ApiModelProperty(value = "评论数量",hidden = true)
     private Integer commentNum;
+    @ApiModelProperty(value = "浏览",hidden = true)
+    private Integer scan;
     @ApiModelProperty(value = "帖子的用户id",hidden = true)
     private Integer uId;
     @ApiModelProperty(value = "创建时间",hidden = true)

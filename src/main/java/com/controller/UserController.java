@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -24,14 +25,14 @@ import javax.servlet.http.HttpSession;
 @Api(tags = "用户Controller")
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    UserService userService;
-    @Autowired
-    HeadPictureController headPictureController;
-    @ApiOperation("注册")
-    @ApiImplicitParams(
+                    @Autowired
+                    UserService userService;
+            @Autowired
+            HeadPictureController headPictureController;
+            @ApiOperation("注册")
+            @ApiImplicitParams(
             {
-                    @ApiImplicitParam(name = "user" ,value = "用户信息",paramType = "body" ,dataType = "用户信息"),
+            @ApiImplicitParam(name = "user" ,value = "用户信息",paramType = "body" ,dataType = "用户信息"),
                     @ApiImplicitParam(name = "code" ,value = "验证码",paramType = "path")
             }
     )
@@ -46,16 +47,15 @@ public class UserController {
     @ApiImplicitParam(name = "loginUser",paramType = "body",dataType = "登录信息")
     @PostMapping("/login")
     @ResponseBody
-    public Result login(@RequestBody LoginUser loginUser,HttpServletRequest request){
-        return userService.login(loginUser,request);
+    public Result login(@RequestBody LoginUser loginUser, HttpServletResponse response){
+        return userService.login(loginUser,response);
     }
 
     @ApiOperation("注销")
     @PostMapping("/cancel")
     @ResponseBody
     public Result cancel(HttpServletRequest request){
-        request.getSession().removeAttribute("user");
-        return R.Ok();
+        return userService.cancel(request);
     }
 
     @ApiOperation("修改密码")

@@ -47,9 +47,12 @@ public class CollectionIServicempl implements CollectionService {
         queryCollection.setCurrent((current - 1)*limit);
         Integer type = queryCollection.getType();
         List<Collection> list = null;
+        Integer size = 0;
         switch (type){
-            case 1:
-                 list = collectionMapper.select(queryCollection);
+            case 1:{
+                list = collectionMapper.select(queryCollection);
+                size = collectionMapper.selectSize(queryCollection);
+            }
         }
 
         Question question = null;
@@ -58,7 +61,8 @@ public class CollectionIServicempl implements CollectionService {
             collection.setQuestion(question);
         }
         if(list != null && list.size() >0){
-            return R.Ok().add("data",list);
+            size = size == null ? 0 : size;
+            return R.Ok().add("data",list).add("size",size);
         }
         return R.Empty();
     }

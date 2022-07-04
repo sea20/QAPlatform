@@ -4,15 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.QuestionMapper">
     <select id="getAll" parameterType="QueryQuestion" resultType="Question">
-        select * from question order by update_time and state = 1 desc limit #{current}, #{limit}
+        select * from question where state = 1 order by update_time desc limit #{current}, #{limit}
+    </select>
+
+    <select id="getAllSize" resultType="int">
+        select count(*) from question where state = 1
     </select>
 
     <select id="getAllByqQuery" parameterType="QueryQuestion" resultType="Question">
-        select * from question where title like "%${qName}%" and state = 1 order by update_time desc limit #{current}, #{limit}
+        select * from question where title like "%${qName}%" and state = 1  ${sortType} limit #{current}, #{limit}
     </select>
+
+    <select id="getAllByqQuerySize" parameterType="QueryQuestion" resultType="int">
+        select count(*) from question where title like "%${qName}%" and state = 1
+    </select>
+
 
     <update id="support">
         update question set comment_num = comment_num + #{count} where id = #{qId}
+    </update>
+
+    <update id="scan">
+        update question set scan = scan + #{count} where id = #{qId}
     </update>
 
     <delete id="delQuestion">

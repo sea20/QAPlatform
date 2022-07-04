@@ -11,11 +11,20 @@ import io.swagger.annotations.ApiModelProperty;
 public class QueryComment1 {
     @ApiModelProperty(value = "帖子id",example = "1")
     Integer qId;
+    @ApiModelProperty(value = "用户id",example = "1")
+    Integer uId;
     @ApiModelProperty(value = "当前页号",example = "1")
     Integer current;
     @ApiModelProperty(value = "每页多少条数据",example = "10")
     Integer limit;
 
+    public Integer getuId() {
+        return uId;
+    }
+
+    public void setuId(Integer uId) {
+        this.uId = uId;
+    }
 
     public Integer getqId() {
         return qId;

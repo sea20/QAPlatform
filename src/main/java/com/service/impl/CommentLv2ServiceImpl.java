@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,9 +26,17 @@ public class CommentLv2ServiceImpl implements CommentLv2Service {
     @Autowired
     CommentLv1Mapper commentLv1Mapper;
     @Override
-    public Result selectAllByc1Id(Integer c1Id) {
-        List list = commentLv2Mapper.selectAllByc1Id(c1Id);
+    public Result selectAllByc1Id(Integer c1Id,Integer uId) {
+        List<CommentLv2> list = commentLv2Mapper.selectAllByc1Id(c1Id);
         if(list != null && list.size() > 0){
+            if(uId != null){
+                Iterator<CommentLv2> iterator = list.iterator();
+                while (iterator.hasNext()){
+                    if(iterator.next().getUdId() != uId){
+                        iterator.remove();
+                    }
+                }
+            }
             return R.Ok().add("data",list);
         }
         return R.Error("没有查到二级评论");

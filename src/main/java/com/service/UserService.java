@@ -5,9 +5,9 @@ import com.bean.userInformation.ChangePasswordUser;
 import com.bean.userInformation.FindPasswordUser;
 import com.bean.userInformation.LoginUser;
 import com.bean.result.Result;
-import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Auther: Maple
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface UserService {
     //登录
-    Result login(LoginUser loginUser, HttpServletRequest request);
+    Result login(LoginUser loginUser, HttpServletResponse response);
     //修改密码
     Result changePassword(ChangePasswordUser cpUser, HttpServletRequest request);
     //注册
@@ -27,4 +27,6 @@ public interface UserService {
     Result changePetName(String petName, HttpServletRequest request);
     //根据Uid获取用户名
     Result getPetNameByUId(Integer uId);
+    //注销
+    Result cancel(HttpServletRequest request);
 }

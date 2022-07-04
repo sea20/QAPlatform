@@ -18,6 +18,7 @@ import java.security.GeneralSecurityException;
 public class EmailService {
     //发送验证码邮件
     public Result sendEmail(String email,String name,HttpSession session){
+        email = email.replace("\"","");
         String code = Integer.toString((int) ((Math.random()*9+1)*10000));
         session.setAttribute(name,code);
         try {

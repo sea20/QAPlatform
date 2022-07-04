@@ -87,9 +87,14 @@ public class HeadPictureServiceImpl implements HeadPictureService {
     @Override
     public Result getHeadPicture(Integer uId) {
         String oldFileName = headPictureMapper.getOldFileName(uId);
+        if (oldFileName == null || oldFileName == ""){
+            String url = "http://47.108.190.196/QAPlatform/headPicture/"+"temp.png";
+            return R.Ok().add("data",url);
+        }
         if(oldFileName == null){
             return R.Empty();
         }
+
         String url = "http://47.108.190.196/QAPlatform/headPicture/"+oldFileName;
         return R.Ok().add("data",url);
     }

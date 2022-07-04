@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,12 +36,15 @@ public class CommentLv2Controller {
     public Result postCommentLv1(@RequestBody CommentLv2 commentLv2, HttpServletRequest request){
         return commentLv2Service.postCommentLv2(commentLv2,request);
     }
-    @GetMapping("/getAllC2/{c1Id}")
-    @ApiOperation("根据pid查询所有一级评论")
-    @ApiImplicitParam(name = "c1Id",value = "帖子id" ,paramType ="path",dataType = "int")
+    @GetMapping("/getAllC2/{c1Id}/{uId}")
+    @ApiOperation("根据一级评论 uid（uid可有可无）查询所有二级评论")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "c1Id",value = "一级评论id" ,paramType ="path",dataType = "int"),
+            @ApiImplicitParam(name = "uId",value = "用户id" ,paramType ="path",dataType = "int")
+    })
     @ResponseBody
-    public Result selectAllByc1Id(@PathVariable Integer c1Id){
-        return commentLv2Service.selectAllByc1Id(c1Id);
+    public Result selectAllByc1Id(@PathVariable Integer c1Id,@PathVariable(required = false) Integer uId){
+        return commentLv2Service.selectAllByc1Id(c1Id,uId);
     }
 
 

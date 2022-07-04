@@ -52,7 +52,8 @@
             <mvc:mapping path="/user/cancel"/>
             <mvc:mapping path="/user/changePetName"/>
             <mvc:mapping path="/user/getCurrentUser"/>
-            
+
+
             <mvc:mapping path="/question/delete/{qid}"/>
             <mvc:mapping path="/question/submit"/>
             <mvc:mapping path="/question/ifSupport/{qId}"/>
@@ -67,7 +68,6 @@
             <mvc:mapping path="/collection/collectionUser/{qId}"/>
             <mvc:mapping path="/collection/select"/>
             <mvc:mapping path="/collection/ifCollection/{qId}"/>
-
 
             <mvc:mapping path="/care/careUser/{uId}"/>
             <mvc:mapping path="/care/ifCare/{uId}"/>
